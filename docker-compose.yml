@@ -13,6 +13,12 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=0
       - GRADIO_SHARE=False
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.zonos.rule=Host(`zonos.archive.neurolearninglabs.com`)"
+      - "traefik.http.routers.zonos.entrypoints=websecure"
+      - "traefik.http.routers.zonos.tls.certresolver=cloudflare"
+      - "traefik.http.services.zonos.loadbalancer.server.port=7860"
 networks:
   dokploy-network:
     external: true
