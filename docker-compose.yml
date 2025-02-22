@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: zonos_container
+    networks: 
+      - dokploy-network
     runtime: nvidia
     dns:
     - 1.1.1.1
@@ -14,3 +16,6 @@ services:
     environment:
       - NVIDIA_VISIBLE_DEVICES=0
       - GRADIO_SHARE=False
+networks:
+  dokploy-network:
+    external: true
