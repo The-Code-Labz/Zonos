@@ -10,6 +10,15 @@ services:
     stdin_open: true
     tty: true
     command: ["python3", "gradio_interface.py"]
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
+                - compute
     environment:
       - NVIDIA_VISIBLE_DEVICES=0
       - GRADIO_SHARE=False
